@@ -1,22 +1,22 @@
 import React from 'react';
-import { Grid, Fab } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import {useQuery} from "@apollo/react-hooks";
+import { getProjects } from "../../services/project";
 import GeneralTable from "../../common/table/GeneralTable";
 
 
 export default function Projects() {
+    const {loading, data, error} = useQuery(getProjects);
+    if(loading) return 'Loading...';
     const columns = ['Name', 'Description', 'Phase', 'Technologies'];
-    const rows = [
-        {
-            name: 'Project',
-            description: 'Description project',
-            phase: 'Dev',
-            technologies: ['Node JS', 'React', 'Graphql']
-        }
-    ]
-    return (
+    if(data)
+        return (
         <Grid container>
-            <GeneralTable type="project" columns={columns} rows={rows} />
-
+            <GeneralTable type="project" columns={columns} rows={data.getProjects} />
         </Grid>
     )
+    if(error)
+        return(
+            <div>Ups! Something happened</div>
+        )
 }
