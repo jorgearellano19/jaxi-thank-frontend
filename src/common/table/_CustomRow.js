@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) =>
     })
 );
 
-function CustomRow({row, type}) {
+function CustomRow({row, type, onClickDetail}) {
     const classes = useStyles();
     if(type === 'project')
         return(
@@ -25,9 +25,9 @@ function CustomRow({row, type}) {
     ) 
     else if(type === 'user') 
             return(
-            <TableRow className={classes.row}>
+            <TableRow onClick={row => onClickDetail(row)} className={classes.row}>
                 <TableCell className={classes.cell} >{row.name}</TableCell>
-                <TableCell className={classes.cell} >{row.timeInCompany}</TableCell>
+                <TableCell className={classes.cell} >{row.timeInCompany} Months</TableCell>
                 <TableCell className={classes.cell} >{row.currentJob}</TableCell>
             </TableRow>
             )

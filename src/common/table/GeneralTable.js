@@ -21,15 +21,16 @@ const useStyles = makeStyles((theme) =>
 );
 
 
-function GeneralTable({columns, rows, type}) {
+function GeneralTable({columns, rows, type, watchDetails}) {
     const classes = useStyles();
+    
     return(
         <TableContainer component={Paper}  className={classes.table}>
             <Table>
                 <TableHeader columns={columns}/>
                 <TableBody>
                     {rows.map((row, index) => (
-                        <CustomRow key={index} row={row} type={type}></CustomRow>
+                        <CustomRow onClickDetail={e => watchDetails(row)} key={index} row={row} type={type}></CustomRow>
                     ))}
                 </TableBody>
             </Table>
