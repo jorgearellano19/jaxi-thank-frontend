@@ -16,11 +16,11 @@ function CustomRow({row, type, onClickDetail}) {
     const classes = useStyles();
     if(type === 'project')
         return(
-            <TableRow className={classes.row}>
+            <TableRow onClick={row => onClickDetail(row)} className={classes.row}>
                 <TableCell className={classes.cell} >{row.name}</TableCell>
                 <TableCell className={classes.cell} >{row.description}</TableCell>
                 <TableCell className={classes.cell} >{row.phase}</TableCell>
-                <TableCell className={classes.cell} >{row.technologies.join(' - ')}</TableCell>
+                <TableCell className={classes.cell} >{row.technologies}</TableCell>
             </TableRow>
     ) 
     else if(type === 'user') 
