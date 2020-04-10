@@ -22,7 +22,16 @@ function CustomRow({row, type}) {
                 <TableCell className={classes.cell} >{row.phase}</TableCell>
                 <TableCell className={classes.cell} >{row.technologies.join(' - ')}</TableCell>
             </TableRow>
-    )
+    ) 
+    else if(type === 'user') 
+            return(
+            <TableRow className={classes.row}>
+                <TableCell className={classes.cell} >{row.name}</TableCell>
+                <TableCell className={classes.cell} >{row.timeInCompany}</TableCell>
+                <TableCell className={classes.cell} >{row.currentJob}</TableCell>
+            </TableRow>
+            )
+
 }
 
 CustomRow.propTypes = {

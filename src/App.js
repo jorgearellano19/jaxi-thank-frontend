@@ -14,6 +14,7 @@ import appTheme from './App.theme';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard';
 import Projects from './components/projects/Projects';
+import Users from './components/users/Users';
 
 const drawerWidth = 240;
 
@@ -99,6 +100,7 @@ function App() {
             <Switch>
               <Route path="/" exact component={Dashboard} ></Route>
               <Route path="/projects" exact component={Projects}></Route>
+              <Route path="/users" exact component={Users}></Route>
             </Switch>
           </main>
       </div>
