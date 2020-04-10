@@ -7,6 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from '@apollo/react-hooks';
 import Sidebar from './components/Sidebar/Sidebar';
 import appTheme from './App.theme';
 import { Switch, Route, useLocation } from 'react-router-dom';
@@ -14,6 +16,10 @@ import Dashboard from './components/dashboard/Dashboard';
 import Projects from './components/projects/Projects';
 
 const drawerWidth = 240;
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql'
+});
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -67,6 +73,7 @@ function App() {
   };
 
   return (
+    <ApolloProvider client={client}>
     <ThemeProvider theme={appTheme}>
       <div className={classes.root}>
         <CssBaseline/>
@@ -96,6 +103,7 @@ function App() {
           </main>
       </div>
     </ThemeProvider>
+    </ApolloProvider>
   )
 }
 
