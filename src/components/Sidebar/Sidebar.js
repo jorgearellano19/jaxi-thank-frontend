@@ -53,11 +53,11 @@ function Sidebar(props) {
     const history = useHistory();
     const optionsBar = [
         {name: 'Dashboard', link: '/', icon: <HomeIcon/>},
-        {name: 'Users', link: '/players', icon: (<AccessibilityIcon/>)},
-        {name: 'Projects', link: '/stats', icon: (<FormatListNumberedIcon/>)},
+        {name: 'Users', link: '/users', icon: (<AccessibilityIcon/>)},
+        {name: 'Projects', link: '/projects', icon: (<FormatListNumberedIcon/>)},
     ];
 
-    const handleClick = (link: string) => {
+    const handleClick = (link) => {
         history.push(link)
     };
     const drawer = (

@@ -29,8 +29,8 @@ function SidebarHeader () {
                 <img alt="logo" className={classes.logo} src={logo}></img>
             </div>
             <div>
-                <Typography color={'primary'} variant={'h5'}>Jorge Arturo Arellano del Aguila</Typography>
-                <Typography color={'primary'} variant={'h5'}>Full Stack developer</Typography>
+                <Typography color={'secondary'} variant={'h5'}>Jorge Arturo Arellano del Aguila</Typography>
+                <Typography color={'secondary'} variant={'h5'}>Full Stack developer</Typography>
             </div>
         </div>
     )
