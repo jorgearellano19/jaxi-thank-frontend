@@ -11,6 +11,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import appTheme from './App.theme';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard';
+import Projects from './components/projects/Projects';
 
 const drawerWidth = 240;
 
@@ -90,6 +91,7 @@ function App() {
             <div className={classes.toolbar} />
             <Switch>
               <Route path="/" exact component={Dashboard} ></Route>
+              <Route path="/projects" exact component={Projects}></Route>
             </Switch>
           </main>
       </div>

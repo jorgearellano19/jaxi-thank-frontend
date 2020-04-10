@@ -1,13 +1,30 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { TableContainer, Paper, Table, TableBody } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import { TableContainer, Paper, Table, TableBody, Fab } from '@material-ui/core';
 import TableHeader from './_TableHeader';
 import CustomRow from './_CustomRow';
+import { makeStyles, createStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) =>
+    createStyles({
+        addButton: {
+            position: 'absolute',
+            top: -12,
+            right: -12,
+            color: theme.palette.background.paper
+        },
+        table: {
+            position: 'relative'
+        }
+    })
+);
 
 
 function GeneralTable({columns, rows, type}) {
+    const classes = useStyles();
     return(
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper}  className={classes.table}>
             <Table>
                 <TableHeader columns={columns}/>
                 <TableBody>
@@ -16,6 +33,9 @@ function GeneralTable({columns, rows, type}) {
                     ))}
                 </TableBody>
             </Table>
+            <Fab className={classes.addButton} aria-label="add">
+                <AddIcon color='secondary'/>
+            </Fab>
         </TableContainer>
     )
 }
