@@ -5,7 +5,7 @@ import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
@@ -13,7 +13,7 @@ import SidebarHeader from './_SidebarHeader';
 import {useHistory} from "react-router-dom";
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         root: {
             display: 'flex',
