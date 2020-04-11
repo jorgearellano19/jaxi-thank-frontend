@@ -51,7 +51,7 @@ const CustomForm = forwardRef(({ obj, type, typeOperation, onSubmitForm, onCance
     
 
     const onSubmit = (data) => {
-        console.log('Submit');
+        console.log('Submit', data);
         onSubmitForm(typeOperation === 'detail' ? 'update' : 'create', data);
     }
     return (

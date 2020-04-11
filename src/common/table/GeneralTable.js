@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 
-function GeneralTable({columns, rows, type, watchDetails}) {
+function GeneralTable({columns, rows, type, watchDetails, onCreate}) {
     const classes = useStyles();
     
     return(
@@ -34,7 +34,7 @@ function GeneralTable({columns, rows, type, watchDetails}) {
                     ))}
                 </TableBody>
             </Table>
-            <Fab className={classes.addButton} aria-label="add">
+            <Fab onClick={e => onCreate()} className={classes.addButton} aria-label="add">
                 <AddIcon color='secondary'/>
             </Fab>
         </TableContainer>

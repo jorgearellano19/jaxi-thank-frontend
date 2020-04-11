@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Grid, Modal, makeStyles, createStyles } from '@material-ui/core';
 import {useQuery, useMutation} from "@apollo/react-hooks";
-import { getProjects, updateProject } from "../../services/project";
+import { getProjects, updateProject, createProject } from "../../services/project";
 import GeneralTable from "../../common/table/GeneralTable";
 import CustomForm from '../../common/Form/Form';
 
@@ -19,13 +19,17 @@ export default function Projects() {
     const classes = useStyles();
     const {loading, data, error} = useQuery(getProjects);
     const [updateMutation] = useMutation(updateProject);
+    const [createMutation] = useMutation(createProject);
     const [visibleModal, setVisibleModal] = useState(false);
+    const [typeInModal, setTypeOperation] = useState('');
     const [projectDetail, setProjectDetail] = useState(null);
+
     if(loading) return 'Loading...';
     const columns = ['Name', 'Description', 'Phase', 'Technologies'];
 
     const seeDetail = (detailUser) => {
         setProjectDetail(detailUser);
+        setTypeOperation('detail');
         setVisibleModal(true);
     }
 
@@ -33,12 +37,10 @@ export default function Projects() {
         setVisibleModal(false);
     }
     const submit = (typeOperation, {name, description, phase, technologies}) => {
-        console.log(projectDetail);
-        let id = projectDetail.id;
-        setProjectDetail(data);
         setVisibleModal(false);
         switch(typeOperation) {
             case 'update':
+                let id = projectDetail.id;
                 return updateMutation({variables: {
                     name,
                     description,
@@ -47,17 +49,40 @@ export default function Projects() {
                     id
 
                 }})
+            case 'create':
+                return createMutation({
+                    variables: {
+                        name, 
+                        description,
+                        phase,
+                        technologies
+                    },
+                    refetchQueries: [
+                        {query: getProjects}
+                    ]
+                })
             default:
                 return null;
         }
     }
 
+    const openNewForm = () => {
+        setTypeOperation('create');
+        setProjectDetail({
+            name: '',
+            technologies: '',
+            description: '',
+            phase: ''
+        });
+        setVisibleModal(true);
+    }
+
     if(data)
         return (
         <Grid container>
-            <GeneralTable watchDetails={detailUser => seeDetail(detailUser)}  type="project" columns={columns} rows={data.getProjects} />
+            <GeneralTable onCreate={openNewForm} watchDetails={detailUser => seeDetail(detailUser)}  type="project" columns={columns} rows={data.getProjects} />
             <Modal className={classes.modal} open={visibleModal}>
-                <CustomForm onCancel={onCancel} onSubmitForm={(typeOperation, data) => submit(typeOperation, data)} obj={projectDetail} type='project' typeOperation='detail' />
+                <CustomForm onCancel={onCancel} onSubmitForm={(typeOperation, data) => submit(typeOperation, data)} obj={projectDetail} type='project' typeOperation={typeInModal} />
             </Modal>
         </Grid>
     )
