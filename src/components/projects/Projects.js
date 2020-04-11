@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Grid, Modal, makeStyles, createStyles } from '@material-ui/core';
 import {useQuery, useMutation} from "@apollo/react-hooks";
 import { getProjects, updateProject, createProject, deleteProject } from "../../services/project";
