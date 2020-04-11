@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Grid, Modal, makeStyles, createStyles } from '@material-ui/core';
 import {useQuery, useMutation} from "@apollo/react-hooks";
-import { getProjects, updateProject, createProject } from "../../services/project";
+import { getProjects, updateProject, createProject, deleteProject } from "../../services/project";
 import GeneralTable from "../../common/table/GeneralTable";
 import CustomForm from '../../common/Form/Form';
 
@@ -20,6 +20,7 @@ export default function Projects() {
     const {loading, data, error} = useQuery(getProjects);
     const [updateMutation] = useMutation(updateProject);
     const [createMutation] = useMutation(createProject);
+    const [deleteMutation] = useMutation(deleteProject);
     const [visibleModal, setVisibleModal] = useState(false);
     const [typeInModal, setTypeOperation] = useState('');
     const [projectDetail, setProjectDetail] = useState(null);
@@ -34,6 +35,18 @@ export default function Projects() {
     }
 
     const onCancel = () => {
+        setVisibleModal(false);
+    }
+
+    const onDeleteItem = () => {
+        deleteMutation({
+            variables: {
+                id: projectDetail.id
+            },
+            refetchQueries: [
+                { query: getProjects }
+            ]
+        });
         setVisibleModal(false);
     }
     const submit = (typeOperation, {name, description, phase, technologies}) => {
@@ -82,7 +95,7 @@ export default function Projects() {
         <Grid container>
             <GeneralTable onCreate={openNewForm} watchDetails={detailUser => seeDetail(detailUser)}  type="project" columns={columns} rows={data.getProjects} />
             <Modal className={classes.modal} open={visibleModal}>
-                <CustomForm onCancel={onCancel} onSubmitForm={(typeOperation, data) => submit(typeOperation, data)} obj={projectDetail} type='project' typeOperation={typeInModal} />
+                <CustomForm onDelete={onDeleteItem} onCancel={onCancel} onSubmitForm={(typeOperation, data) => submit(typeOperation, data)} obj={projectDetail} type='project' typeOperation={typeInModal} />
             </Modal>
         </Grid>
     )

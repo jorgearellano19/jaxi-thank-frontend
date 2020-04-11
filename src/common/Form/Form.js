@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) =>
     }));
 
 
-const CustomForm = forwardRef(({ obj, type, typeOperation, onSubmitForm, onCancel }, ref) => {
+const CustomForm = forwardRef(({ obj, type, typeOperation, onSubmitForm, onCancel, onDelete }, ref) => {
     const { register, handleSubmit, errors } = useForm();
     const classes = useStyles();
     const formObject = mapForms(type);
@@ -114,7 +114,7 @@ const CustomForm = forwardRef(({ obj, type, typeOperation, onSubmitForm, onCance
                         <Button onClick={onCancel} variant="contained">Cancel</Button>
                     </Grid>
                     <Grid item xs={4}>
-                        {typeOperation !== 'create' ? <Button variant="contained">Delete</Button> : null}
+                        {typeOperation !== 'create' ? <Button onClick={onDelete} variant="contained">Delete</Button> : null}
                     </Grid>
                     <Grid item xs={4}>
                         <Button type="submit" variant="contained">Save</Button>

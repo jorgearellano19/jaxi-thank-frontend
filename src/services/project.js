@@ -36,8 +36,22 @@ mutation createProject($name: String!, $technologies: String!, $phase: String!, 
   } 
 `
 
+const deleteProject = gql `
+mutation deleteProject($id: ID!) {
+    deleteProject(id: $id) {
+      name
+      description
+      id
+      technologies
+      phase
+    } 
+  } 
+  
+`
+
 export {
     getProjects,
     updateProject,
-    createProject
+    createProject,
+    deleteProject
 };
