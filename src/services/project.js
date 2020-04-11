@@ -6,11 +6,38 @@ query Query{
         name
         description
         phase
+        id
         technologies
     }
 }
 `;
 
+const updateProject = gql `
+mutation updateProject($name: String!, $id: ID!, $technologies: String!, $phase: String!, $description: String!) {
+    updateProject(name: $name, description: $description, technologies: $technologies, phase: $phase, id: $id) {
+      name
+      description
+      id
+      technologies
+      phase
+    } 
+  } 
+`
+
+const createProject = gql`
+mutation createProject($name: String!, $technologies: String!, $phase: String!, $description: String!) {
+    updateProject(name: $name, description: $description, technologies: $technologies, phase: $phase) {
+      name
+      description
+      id
+      technologies
+      phase
+    } 
+  } 
+`
+
 export {
-    getProjects
+    getProjects,
+    updateProject,
+    createProject
 };

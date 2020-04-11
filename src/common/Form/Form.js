@@ -48,10 +48,11 @@ const CustomForm = forwardRef(({ obj, type, typeOperation, onSubmitForm, onCance
     const { register, handleSubmit, errors } = useForm();
     const classes = useStyles();
     const formObject = mapForms(type);
+    
 
     const onSubmit = (data) => {
         console.log('Submit');
-        onSubmitForm(typeOperation, data);
+        onSubmitForm(typeOperation === 'detail' ? 'update' : 'create', data);
     }
     return (
         <Grid container direction="column" justify="space-around" className={classes.root}>
